@@ -30,5 +30,25 @@ export function notificationController(ctx: Registry) {
         sendAt: t.Union([t.String(), t.Number()]),
       }),
     },
-  )
+  ).post('/notifications/self-schedule', async ({
+    firebase, body
+  }) => {
+    const response = await firebase.sendPush(body.token, body.title, body.msgBody, {
+      type: 'self-schedule',
+      time: body.time,
+    })
+
+    return {
+      success: true,
+      notificationId: response,
+    }
+  }, {
+    body: t.Object({
+      token: t.String(),
+      title: t.String(),
+      msgBody: t.String(),
+      time: t.String(),
+      timezone: t.String()
+    })
+  })
 }
