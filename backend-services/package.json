@@ -26,6 +26,8 @@
   "dependencies": {
     "@elysiajs/openapi": "^1.4.14",
     "@sinclair/typebox": "^0.34.48",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "drizzle-kit": "1.0.0-beta.16-2ffd1a5",
     "drizzle-orm": "1.0.0-beta.16-2ffd1a5",
     "elysia": "^1.4.27",

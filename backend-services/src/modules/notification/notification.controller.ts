@@ -1,5 +1,7 @@
 import { t } from "elysia";
 import type { Registry } from "~/registry";
+import { fromZonedTime } from 'date-fns-tz'
+import { parse } from 'date-fns'
 
 export function notificationController(ctx: Registry) {
   return ctx.post(
@@ -33,9 +35,11 @@ export function notificationController(ctx: Registry) {
   ).post('/notifications/self-schedule', async ({
     firebase, body
   }) => {
+    const date = fromZonedTime(parse(body.time, 'HH:mm:ss', new Date()), body.timezone)
+
     const response = await firebase.sendPush(body.token, body.title, body.msgBody, {
       type: 'self-schedule',
-      time: body.time,
+      time: date.toISOString(),
     })
 
     return {
@@ -47,8 +51,8 @@ export function notificationController(ctx: Registry) {
       token: t.String(),
       title: t.String(),
       msgBody: t.String(),
+      timezone: t.String(),
       time: t.String(),
-      timezone: t.String()
     })
   })
 }

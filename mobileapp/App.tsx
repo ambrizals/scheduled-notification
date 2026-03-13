@@ -25,6 +25,7 @@ async function handleRemoteMessage(remoteMessage: RemoteMessage) {
     remoteMessage.data?.type === "self-schedule" &&
     typeof remoteMessage.data?.time === "string"
   ) {
+    console.log("how we did it !", remoteMessage.data);
     await Notifications.scheduleNotificationAsync({
       content: { title, body, data: remoteMessage.data },
       trigger: {
