@@ -131,3 +131,15 @@ bun expo run:android
 # For iOS
 bun expo run:ios
 ```
+
+---
+
+## Comparison: Pros & Cons
+
+| Feature | Backend-Scheduled | Client-Scheduled (Self) |
+| :--- | :--- | :--- |
+| **Connectivity** | Requires internet at the moment of delivery. | Once "instruction" is received, works **offline**. |
+| **Server Load** | High (must manage thousands of active jobs). | Low (one-time push instruction). |
+| **Reliability** | Centralized; easy to track if it "fired." | High offline reliability; hardware-level triggers. |
+| **Flexibility** | Easy to cancel/update via DB before it fires. | Harder to cancel once scheduled on-device. |
+| **Best For** | Broadcasts, marketing, real-time events. | Reminders, Alarms, Personal Timers. |
